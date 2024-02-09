@@ -78,7 +78,7 @@ class CountryCollector(BaseCollector):
         """
         Чтение данных из кэша.
 
-        :return:
+        :return: Модель страны
         """
 
         async with aiofiles.open(await cls.get_file_path(), mode="r") as file:
@@ -103,6 +103,9 @@ class CountryCollector(BaseCollector):
                         population=item["population"],
                         subregion=item["subregion"],
                         timezones=item["timezones"],
+                        area=item["area"],
+                        latitude=item["latitude"],
+                        longitude=item["longitude"],
                     )
                 )
 
