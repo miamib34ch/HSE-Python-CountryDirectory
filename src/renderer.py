@@ -28,27 +28,40 @@ class Renderer:
         :return: Результат форматирования
         """
 
-        return (
-            f"Страна: {self.location_info.location.name}",
-            f"Столица: {self.location_info.location.capital}",
-            f"Регион: {self.location_info.location.subregion}",
-            f"Языки: {await self._format_languages()}",
-            f"Население страны: {await self._format_population()} чел.",
-            f"Курсы валют: {await self._format_currency_rates()}",
+        values = {
+            "Страна": self.location_info.location.name,
+            "Столица": self.location_info.location.capital,
+            "Регион": self.location_info.location.subregion,
+            "Языки": await self._format_languages(),
+            "Население страны": await self._format_population(),
+            "Курсы валют": await self._format_currency_rates(),
 
-            f"Площадь страны: {self.location_info.location.area}",
-            f"Широта столицы: {self.location_info.location.latitude}",
-            f"Долгота столицы: {self.location_info.location.longitude}",
+            "Площадь страны": self.location_info.location.area,
+            "Широта": self.location_info.location.latitude,
+            "Долгота": self.location_info.location.longitude,
 
-            f"Погода: {self.location_info.weather.temp} °C",
-            f"Время: {self.location_info.weather.dt}",
-            f"Часовой пояс: {self.location_info.weather.timezone}",
-            f"Описание погоды: {self.location_info.weather.description}",
-            f"Видимость: {self.location_info.weather.visibility}",
-            f"Влажность: {self.location_info.weather.humidity}",
-            f"Скорость ветра: {self.location_info.weather.wind_speed}",
-            f"Давление: {self.location_info.weather.pressure}",
+            "Погода": self.location_info.weather.temp,
+            "Время": self.location_info.weather.dt.strftime("%d.%m.%Y %H:%M"),
+            "Часовой пояс": self.location_info.weather.timezone,
+            "Описание погоды": self.location_info.weather.description,
+            "Видимость": self.location_info.weather.visibility,
+            "Влажность": self.location_info.weather.humidity,
+            "Скорость ветра": self.location_info.weather.wind_speed,
+            "Давление": self.location_info.weather.pressure,
+        }
+
+        first_column_width = max(len(key) for key in values) + 1
+        second_column_width = max(len(str(value)) for value in values.values()) + 1
+        formatted_values = [("-" * (first_column_width + second_column_width + 3))]
+        formatted_values.extend(
+            [
+                f"|{key:<{first_column_width}}|{value:>{second_column_width}}|"
+                for key, value in values.items()
+            ]
         )
+        formatted_values.append("-" * (first_column_width + second_column_width + 3))
+
+        return tuple(formatted_values)
 
     async def _format_languages(self) -> str:
         """
