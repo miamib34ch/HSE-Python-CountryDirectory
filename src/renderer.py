@@ -35,10 +35,19 @@ class Renderer:
             f"Языки: {await self._format_languages()}",
             f"Население страны: {await self._format_population()} чел.",
             f"Курсы валют: {await self._format_currency_rates()}",
-            f"Погода: {self.location_info.weather.temp} °C",
-            f"Площадь: {self.location_info.location.area}",
+
+            f"Площадь страны: {self.location_info.location.area}",
             f"Широта столицы: {self.location_info.location.latitude}",
             f"Долгота столицы: {self.location_info.location.longitude}",
+
+            f"Погода: {self.location_info.weather.temp} °C",
+            f"Время: {self.location_info.weather.dt}",
+            f"Часовой пояс: {self.location_info.weather.timezone}",
+            f"Описание погоды: {self.location_info.weather.description}",
+            f"Видимость: {self.location_info.weather.visibility}",
+            f"Влажность: {self.location_info.weather.humidity}",
+            f"Скорость ветра: {self.location_info.weather.wind_speed}",
+            f"Давление: {self.location_info.weather.pressure}",
         )
 
     async def _format_languages(self) -> str:

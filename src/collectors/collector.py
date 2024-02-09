@@ -207,7 +207,7 @@ class WeatherCollector(BaseCollector):
         Чтение данных из кэша.
 
         :param location:
-        :return:
+        :return: Модель погоды
         """
 
         filename = f"{location.capital}_{location.alpha2code}".lower()
@@ -222,6 +222,9 @@ class WeatherCollector(BaseCollector):
                 humidity=result["main"]["humidity"],
                 wind_speed=result["wind"]["speed"],
                 description=result["weather"][0]["description"],
+                visibility=result["visibility"],
+                dt=result["dt"],
+                timezone=result["timezone"] // 3600,
             )
 
         return None
