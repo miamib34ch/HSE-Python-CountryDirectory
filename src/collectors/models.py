@@ -166,14 +166,16 @@ class WeatherInfoDTO(BaseModel):
 class NewsInfoDTO(BaseModel):
     """
     Модель данных новостей.
+
     .. code-block::
+
         NewsDTO(
             source="CNN",
             title="The latest news about the coronavirus pandemic",
             description="The latest news about the coronavirus pandemic",
             url="https://www.cnn.com/world/live-news/coronavirus-pandemic-09-14-21-intl/index.html",
             published_at="2021-09-14T20:00:00Z",
-            content="The latest news about the coronavirus pandemic",
+            content="The latest news about the coronavirus pandemic"
         )
     """
 
