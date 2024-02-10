@@ -1,3 +1,2 @@
 *.*
-.gitignore
-crontab.log
+!.gitignore
