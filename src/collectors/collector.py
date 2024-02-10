@@ -250,7 +250,7 @@ class NewsCollector(BaseCollector):
         return CACHE_TTL_NEWS
 
     async def collect(
-            self, locations: FrozenSet[LocationDTO] = frozenset(), **kwargs: Any
+        self, locations: FrozenSet[LocationDTO] = frozenset(), **kwargs: Any
     ) -> None:
         """
         Сбор информации о новостях.

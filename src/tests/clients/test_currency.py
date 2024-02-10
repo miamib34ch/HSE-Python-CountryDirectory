@@ -6,6 +6,7 @@
 import pytest
 from clients.currency import CurrencyClient
 
+
 @pytest.mark.asyncio
 class TestClientCurrency:
     """

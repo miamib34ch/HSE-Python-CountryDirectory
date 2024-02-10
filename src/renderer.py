@@ -3,6 +3,7 @@
 """
 
 from decimal import ROUND_HALF_UP, Decimal
+
 from collectors.models import LocationInfoDTO, NewsInfoDTO
 
 
@@ -34,11 +35,9 @@ class Renderer:
             "Языки": await self._format_languages(),
             "Население страны": await self._format_population(),
             "Курсы валют": await self._format_currency_rates(),
-
             "Площадь страны": self.location_info.location.area,
             "Широта": self.location_info.location.latitude,
             "Долгота": self.location_info.location.longitude,
-
             "Погода": self.location_info.weather.temp,
             "Время": self.location_info.weather.dt.strftime("%d.%m.%Y %H:%M"),
             "Часовой пояс": self.location_info.weather.timezone,
@@ -101,11 +100,11 @@ class Renderer:
         )
 
     async def _format_news_line(
-            self,
-            first_col_name: str,
-            content: str,
-            first_column_width: int,
-            second_column_width: int,
+        self,
+        first_col_name: str,
+        content: str,
+        first_column_width: int,
+        second_column_width: int,
     ) -> list[str]:
         """
         Форматирование информации о новостях.
@@ -125,17 +124,17 @@ class Renderer:
             [
                 f"|{'':<{first_column_width}}|{content[line:line + second_column_width]:<{second_column_width}}|"
                 for line in range(
-                second_column_width, len(content), second_column_width
-            )
+                    second_column_width, len(content), second_column_width
+                )
             ]
         )
         return values
 
     async def _format_news(
-            self,
-            news: list[NewsInfoDTO] | None,
-            first_column_width: int,
-            second_column_width: int,
+        self,
+        news: list[NewsInfoDTO] | None,
+        first_column_width: int,
+        second_column_width: int,
     ) -> list[str]:
         """
         Форматирование информации о новостях.
@@ -158,15 +157,15 @@ class Renderer:
         ]
         for item in news:
             for first_col_name, content in zip(
-                    first_column_names,
-                    [
-                        item.source,
-                        item.title,
-                        item.url,
-                        item.published_at.strftime("%d.%m.%Y %H:%M"),
-                        item.description,
-                        item.content,
-                    ],
+                first_column_names,
+                [
+                    item.source,
+                    item.title,
+                    item.url,
+                    item.published_at.strftime("%d.%m.%Y %H:%M"),
+                    item.description,
+                    item.content,
+                ],
             ):
                 values.extend(
                     await self._format_news_line(

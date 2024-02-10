@@ -26,4 +26,6 @@ class TestClientWeather:
     async def test_get_weather(self, mocker, client):
         mocker.patch("clients.weather.WeatherClient._request")
         await client.get_weather("test")
-        client._request.assert_called_with(f"{self.base_url}?units=metric&q=test&appid={API_KEY_OPENWEATHER}")
+        client._request.assert_called_with(
+            f"{self.base_url}?units=metric&q=test&appid={API_KEY_OPENWEATHER}"
+        )

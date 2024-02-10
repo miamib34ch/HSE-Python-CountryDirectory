@@ -35,4 +35,6 @@ class NewsClient(BaseClient):
         :param location: город или страна
         :return: данные о городе или стране
         """
-        return await self._request(f"{await self.get_base_url()}?q={location}&apiKey={API_KEY_NEWSAPI}&pageSize={NEWS_COUNT}")
+        return await self._request(
+            f"{await self.get_base_url()}?q={location}&apiKey={API_KEY_NEWSAPI}&pageSize={NEWS_COUNT}"
+        )
