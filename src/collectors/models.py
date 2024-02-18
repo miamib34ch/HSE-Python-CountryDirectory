@@ -2,6 +2,7 @@
 Описание моделей данных (DTO).
 """
 
+from datetime import datetime
 from pydantic import Field, BaseModel
 
 
@@ -93,6 +94,9 @@ class CountryDTO(BaseModel):
             timezones=[
                 "UTC+02:00",
             ],
+            latitude=53.0,
+            longitude=28.0,
+            area"=207600.0
         )
     """
 
@@ -106,6 +110,9 @@ class CountryDTO(BaseModel):
     population: int
     subregion: str
     timezones: list[str]
+    area: float | None
+    latitude: float | None
+    longitude: float | None
 
 
 class CurrencyRatesDTO(BaseModel):
@@ -140,6 +147,9 @@ class WeatherInfoDTO(BaseModel):
             humidity=54,
             wind_speed=4.63,
             description="scattered clouds",
+            visibility=10000,
+            dt=datetime.datetime(2021, 9, 14, 20, 0),
+            timezone=0
         )
     """
 
@@ -148,6 +158,33 @@ class WeatherInfoDTO(BaseModel):
     humidity: int
     wind_speed: float
     description: str
+    visibility: int
+    dt: datetime
+    timezone: int
+
+
+class NewsInfoDTO(BaseModel):
+    """
+    Модель данных новостей.
+
+    .. code-block::
+
+        NewsDTO(
+            source="CNN",
+            title="The latest news about the coronavirus pandemic",
+            description="The latest news about the coronavirus pandemic",
+            url="https://www.cnn.com/world/live-news/coronavirus-pandemic-09-14-21-intl/index.html",
+            published_at="2021-09-14T20:00:00Z",
+            content="The latest news about the coronavirus pandemic"
+        )
+    """
+
+    source: str
+    title: str
+    description: str
+    url: str
+    published_at: datetime
+    content: str
 
 
 class LocationInfoDTO(BaseModel):
@@ -201,3 +238,4 @@ class LocationInfoDTO(BaseModel):
     location: CountryDTO
     weather: WeatherInfoDTO
     currency_rates: dict[str, float]
+    news: list[NewsInfoDTO] | None
